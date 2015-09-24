@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/twolfy/taskFinder/issues"
   },
-  "homepage": "https://github.com/twolfy/taskFinder#readme"
+  "homepage": "https://github.com/twolfy/taskFinder#readme",
+  "dependencies": {
+    "walk": "^2.3.9"
+  }
 }
