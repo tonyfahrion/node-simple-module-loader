@@ -1,0 +1,22 @@
+{
+  "name": "taskfinder",
+  "version": "1.0.0",
+  "description": "A simple lookup for node \"modules\" within a specific directory",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twolfy/taskFinder.git"
+  },
+  "keywords": [
+    "expressjs"
+  ],
+  "author": "Tony Wolf",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/twolfy/taskFinder/issues"
+  },
+  "homepage": "https://github.com/twolfy/taskFinder#readme"
+}
