@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/twolfy/taskFinder#readme",
   "dependencies": {
+    "express": "^4.13.3",
     "walk": "^2.3.9"
   }
 }

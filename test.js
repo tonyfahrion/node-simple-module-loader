@@ -1,7 +1,10 @@
 "use strict";
 
-var taskFinder = require('./index.js');
+var taskFinder = require('./index.js'),
+    express    = require('express');
 
-var taskList = taskFinder.findTasksIn('./tests/testTasksDir', function () {
-    console.log("result1: " + taskFinder.getTasksList().toString());
+var app = express();
+
+var taskList = taskFinder.registerTasksFromDirectory('./tests/testTasksDir', app, function () {
+    app.listen(3000);
 });
