@@ -16,4 +16,3 @@ Each task can provide multiple methods and has to export at least 3 functions:
 * taskMethods() // returns an array of supported methods
 * one of runGetTask(req, res), runPostTask(req, res) // handles the request itself
 
-# Footnote: this is my first nodejs module :-)
