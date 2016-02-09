@@ -1,14 +1,14 @@
 {
-  "name": "taskfinder",
+  "name": "node-simple-module-loader",
   "version": "1.0.0",
   "description": "A simple lookup for node \"modules\" within a specific directory",
-  "main": "index.js",
+  "main": "index.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/twolfy/taskFinder.git"
+    "url": "git+https://github.com/twolfy/node-simple-module-loader.git"
   },
   "keywords": [
     "expressjs"
@@ -16,11 +16,11 @@
   "author": "Tony Wolf",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/twolfy/taskFinder/issues"
+    "url": "https://github.com/twolfy/node-simple-module-loader/issues"
   },
-  "homepage": "https://github.com/twolfy/taskFinder#readme",
+  "homepage": "https://github.com/twolfy/node-simple-module-loader#readme",
   "dependencies": {
-    "express": "^4.13.3",
+    "coffee-script": "^1.10.0",
     "walk": "^2.3.9"
   }
 }
