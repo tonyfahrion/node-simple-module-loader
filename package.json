@@ -2,7 +2,7 @@
   "name": "node-simple-module-loader",
   "version": "1.1.0",
   "description": "A simple lookup for node \"modules\" within a specific directory",
-  "main": "index.coffee",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/twolfy/node-simple-module-loader#readme",
   "dependencies": {
-    "coffee-script": "^1.10.0",
     "express": "^4.13.4",
     "walk": "^2.3.9"
   }
