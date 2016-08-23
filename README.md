@@ -16,3 +16,23 @@ Each task can provide multiple methods and has to export at least 3 functions:
 * taskMethods() // returns an array of supported methods
 * one of runGetTask(req, res), runPostTask(req, res) // handles the request itself
 
+
+# Specify param validation
+
+```javascript
+module.exports = {
+  description: 'Book store module',
+  routes: [
+    {
+      route: '/v1/book/:id',
+      method: 'GET',
+      call: (req, res) => { return getBook(req, res) },
+      params: {
+        required: {
+          id: (i) => parseInt(i) > 0
+        }
+      }
+    }
+  ]
+}
+```
