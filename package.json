@@ -1,6 +1,6 @@
 {
   "name": "node-simple-module-loader",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simple lookup for node \"modules\" within a specific directory",
   "main": "index.js",
   "scripts": {
