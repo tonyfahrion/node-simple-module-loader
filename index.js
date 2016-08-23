@@ -72,46 +72,41 @@ var loadFile = (filename) => {
 
 
 /*
-ignores unknown params in req.body
-checks only body parameters
-needs to be public, so it can be called by express
+  ignores unknown params in req.body
+  checks only body parameters
+  needs to be public, so it can be called by express
 */
 var prevalidateRequest = (req, res, next) => {
-    let route = routeValidators[req.route.path]
-    if(req.body === undefined && route.required !== undefined) {// if no params are send, check if we have a required field
-        req.app.log.warn({action: 'prevalidate_request', details: {msg: 'param_missing', param: Object.keys(route.required), got: req.body}})
-        return res.json({rc: 400, msg: 'param_missing', param: Object.keys(route.required)})
-    }
-    
-    let params_failed = [] // add param, if validation failed...
-    if(route.required !== undefined)
-        for(let [param_name, param_validator] of route.required)
-            if(req.body[param_name] !== undefined || param_validator(req.body[param_name]) == false)
-                params_failed.push(param_name + ' (required)')
-    
-    if(route.optional !== undefined)
-        for(let [param_name, param_validator] of route.optional)
-            if(req.body[param_name] !== undefined)
-                if(param_validator(req.body[param_name]) == false)
-                    params_failed.push(param_name + ' (optional)')
-    
-    if(params_failed !== undefined) {
-        req.app.log.warn({action: 'prevalidate_request', details: {msg: 'param_missing_or_invalid', params_failed: params_failed, params: req.body}})
-        return res.json({rc: 400, msg: 'param_missing_or_invalid', params_failed: params_failed})
-    }
-    
-    return next()
+  let params_failed = [] // add param, if validation failed...
+  let route         = routeValidators[req.route.path]
+  
+  Object.keys(route.required || {}).forEach((param) => {
+    if(req.params.hasOwnProperty(param) === false || route.required[param](req.params[param]) == false)
+      params_failed.push(param + ' (required)')
+  })
+  
+  Object.keys(route.optional || {}).forEach((param) => {
+    if(req.params.hasOwnProperty(param) && route.optional[param](req.params[param]) == false)
+      params_failed.push(param + ' (optional)')
+  })
+  
+  if(params_failed.length > 0) {
+      req.log.warn({action: 'prevalidate_request', details: {msg: 'param_missing_or_invalid', params_failed, params: req.params}})
+      return res.json({rc: 400, msg: 'param_missing_or_invalid', params_failed, params: req.params})
+  }
+  
+  return next()
 }
 
 
 var addRouteToExpress = (element) => {
-  console.log('[DEBUG] adding element ', element.route)
-    if(['GET', 'POST', 'PUT'].indexOf(element.method) < 0)
-        return console.error('[ERROR] got invalid method: ', element)
-    
-    if(element.params !== undefined) {
-        routeValidators[element.route] = element.params
-        express[element.method.toLowerCase()](element.route, prevalidateRequest)
-    }
-    express[element.method.toLowerCase()](element.route, element.call)
+  console.log('[DEBUG] adding route ', element.route)
+  if(['GET', 'POST', 'PUT'].indexOf(element.method) < 0)
+    return console.error('[ERROR] got invalid method: ', element)
+  
+  if(element.params !== undefined) {
+    routeValidators[element.route] = element.params
+    express[element.method.toLowerCase()](element.route, prevalidateRequest)
+  }
+  express[element.method.toLowerCase()](element.route, element.call)
 }
